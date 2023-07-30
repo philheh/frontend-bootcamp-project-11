@@ -2,10 +2,12 @@ import axios from 'axios';
 import parse from './parse.js';
 import formatFeed from './formatFeed.js';
 
-const proxiedUrl = (url) => `https://allorigins.hexlet.app/get?disableCache=true&url=${url}`;
+const proxiedUrl = (url) =>
+  `https://allorigins.hexlet.app/get?disableCache=true&url=${url}`;
 
-const getFeed = (url, watchedState) => {
-  return axios.get(proxiedUrl(url))
+const getFeed = (url, watchedState) =>
+  axios
+    .get(proxiedUrl(url))
     .then((res) => {
       parse(res)
         .then((parsed) => {
@@ -26,6 +28,5 @@ const getFeed = (url, watchedState) => {
       watchedState.error = error.name;
       watchedState.status = 'filling';
     });
-};
 
 export default getFeed;
