@@ -1,14 +1,15 @@
-import validate from './validator.js';
 import i18next from 'i18next';
+import onChange from 'on-change';
+import validate from './validator.js';
 import resources from '../locales/index.js';
 import renderStatus from './renderStatus.js';
-import onChange from 'on-change';
 import renderErrors from './renderErrors.js';
 import getFeed from './getFeed.js';
 import renderFeeds from './renderFeeds.js';
 import renderPosts from './renderPosts.js';
 import renderModal from './renderModal.js';
 import renderVisitedLinks from './renderVisitedLinks.js';
+
 const app = () => {
   const i18Instance = i18next.createInstance();
   i18Instance.init({
@@ -62,7 +63,7 @@ const app = () => {
         renderVisitedLinks(value);
         break;
       default:
-        return;
+        throw new Error('invalid render was called');
     }
   });
 

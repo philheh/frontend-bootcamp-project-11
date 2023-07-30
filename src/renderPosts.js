@@ -13,7 +13,7 @@ const renderPosts = (elements, state, i18Instance) => {
       'justify-content-between',
       'align-items-start',
       'border-0',
-      'border-end-0'
+      'border-end-0',
     );
     const a = document.createElement('a');
 

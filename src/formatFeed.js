@@ -17,7 +17,13 @@ const formatFeed = (doc, url) => {
     const feedId = feed.id;
     const postId = uniqueId();
 
-    return { postTitle, postDescription, postLink, feedId, postId };
+    return {
+      postTitle,
+      postDescription,
+      postLink,
+      feedId,
+      postId,
+    };
   });
 
   return { feed, posts };
