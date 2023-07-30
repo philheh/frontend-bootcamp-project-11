@@ -8,4 +8,3 @@ const renderSuccess = (elements, i18Instance) => {
 };
 
 export default renderSuccess;
-

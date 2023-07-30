@@ -12,4 +12,3 @@ const validate = (url, state) => {
 };
 
 export default validate;
-
