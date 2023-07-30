@@ -81,7 +81,6 @@ const app = () => {
   });
 
   elements.postsContainer.addEventListener('click', (e) => {
-    e.preventDefault();
     if (Object.hasOwn(e.target.dataset, 'id') && e.target.tagName === 'BUTTON') {
       const { id } = e.target.dataset;
       watchedState.modalID = id;
