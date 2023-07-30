@@ -4,7 +4,8 @@ import formatFeed from './formatFeed.js';
 
 const proxiedUrl = (url) => `https://allorigins.hexlet.app/get?disableCache=true&url=${url}`;
 
-const getFeed = (url, watchedState) => axios
+const getFeed = (url, watchedState) =>
+  axios
     .get(proxiedUrl(url))
     .then((res) => {
       parse(res)

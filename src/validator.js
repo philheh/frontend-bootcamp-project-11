@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-const validate = (url, state) => {
+const validate = (currentUrl, state) => {
   const existingUrls = state.feeds.map(({ url }) => url);
   const urlSchema = yup
     .string()
@@ -8,7 +8,7 @@ const validate = (url, state) => {
     .nonNullable()
     .notOneOf(existingUrls, 'Already')
     .required('This field is required');
-  return urlSchema.validate(url);
+  return urlSchema.validate(currentUrl);
 };
 
 export default validate;

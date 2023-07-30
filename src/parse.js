@@ -1,4 +1,5 @@
-const parse = (res) => new Promise((resolve, reject) => {
+const parse = (res) =>
+  new Promise((resolve, reject) => {
     const parser = new DOMParser();
     const doc = parser.parseFromString(res.data.contents, 'application/xml');
     const errorNode = doc.querySelector('parsererror');
