@@ -10,5 +10,5 @@ const parse = (res) =>
       resolve(doc);
     }
   });
-
 export default parse;
+
