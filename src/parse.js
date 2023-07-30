@@ -11,4 +11,3 @@ const parse = (res) =>
     }
   });
 export default parse;
-
