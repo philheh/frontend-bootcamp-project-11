@@ -14,6 +14,7 @@ const getFeed = (url, watchedState) =>
           const { feed, posts } = formatFeed(parsed, url);
           watchedState.feeds.unshift(feed);
           watchedState.posts.unshift(...posts);
+          console.log(watchedState.posts)
           watchedState.error = null;
           watchedState.status = 'success';
         })
