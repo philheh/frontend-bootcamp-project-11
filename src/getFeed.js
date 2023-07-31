@@ -16,7 +16,7 @@ const getFeed = (url, watchedState, state) =>
           watchedState.posts.unshift(...posts);
           watchedState.error = null;
           watchedState.status = 'success';
-          refreshFeed(feed, state, watchedState)
+          //refreshFeed(feed, state, watchedState)
         })
         .catch((oshibka) => {
           watchedState.error = oshibka.message;
