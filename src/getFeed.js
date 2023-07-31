@@ -1,11 +1,12 @@
 import axios from 'axios';
 import parse from './parse.js';
 import formatFeed from './formatFeed.js';
+import refreshFeed from './refreshFeed.js';
 
-const proxiedUrl = (url) =>
+export const proxiedUrl = (url) =>
   `https://allorigins.hexlet.app/get?disableCache=true&url=${url}`;
 
-const getFeed = (url, watchedState) =>
+const getFeed = (url, watchedState, state) =>
   axios
     .get(proxiedUrl(url))
     .then((res) => {
@@ -16,6 +17,7 @@ const getFeed = (url, watchedState) =>
           watchedState.posts.unshift(...posts);
           watchedState.error = null;
           watchedState.status = 'success';
+          refreshFeed(feed, state, watchedState)
         })
         .catch((oshibka) => {
           watchedState.error = oshibka.message;
