@@ -2,9 +2,8 @@ import axios from 'axios';
 import parse from './parse.js';
 import formatFeed from './formatFeed.js';
 import refreshFeed from './refreshFeed.js';
+import proxiedUrl from './proxy.js';
 
-export const proxiedUrl = (url) =>
-  `https://allorigins.hexlet.app/get?disableCache=true&url=${url}`;
 
 const getFeed = (url, watchedState, state) =>
   axios
