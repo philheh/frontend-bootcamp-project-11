@@ -1,9 +1,7 @@
 import axios from 'axios';
 import parse from './parse.js';
 import formatFeed from './formatFeed.js';
-import refreshFeed from './refreshFeed.js';
 import proxiedUrl from './proxy.js';
-
 
 const getFeed = (url, watchedState, state) =>
   axios
@@ -16,7 +14,6 @@ const getFeed = (url, watchedState, state) =>
           watchedState.posts.unshift(...posts);
           watchedState.error = null;
           watchedState.status = 'success';
-          //refreshFeed(feed, state, watchedState)
         })
         .catch((oshibka) => {
           watchedState.error = oshibka.message;
