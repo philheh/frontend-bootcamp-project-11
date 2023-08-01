@@ -20,7 +20,6 @@ const app = () => {
     error: null,
     visitedLinksIDs: new Set(),
     modalID: null,
-    updatingStatus: false,
   };
 
   const watchedState = onChange(state, render(elements, state, i18Instance));

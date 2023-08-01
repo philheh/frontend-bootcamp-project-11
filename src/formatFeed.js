@@ -1,7 +1,10 @@
+import { uniqueId } from 'lodash';
+
 const formatFeed = (doc, url) => {
   const feed = {
     title: doc.querySelector('rss > channel > title').textContent,
     description: doc.querySelector('rss > channel > description').textContent,
+    id: uniqueId(),
     url,
   };
 
@@ -12,12 +15,14 @@ const formatFeed = (doc, url) => {
     const postDescription = postDoc.querySelector('description').textContent;
     const postLink = postDoc.querySelector('link').textContent;
     const feedId = feed.id;
+    const postId = uniqueId();
 
     return {
       postTitle,
       postDescription,
       postLink,
       feedId,
+      postId,
     };
   });
 
