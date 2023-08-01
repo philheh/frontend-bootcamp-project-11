@@ -2,22 +2,37 @@ import axios from 'axios';
 import parse from './parse.js';
 import formatFeed from './formatFeed.js';
 import proxiedUrl from './proxy.js';
-
-const getFeed = (url, watchedState) => axios
+import { uniqueId } from 'lodash';
+import refreshFeeds from './refreshFeeds.js';
+const getFeed = (url, watchedState, state) => axios
   .get(proxiedUrl(url))
   .then((res) => {
     parse(res)
       .then((parsed) => {
         const { feed, posts } = formatFeed(parsed, url);
+        feed.id = uniqueId()
+        const settledPosts = posts.map(({postTitle,
+          postDescription,
+          postLink}) => {
+          return {
+            postTitle,
+            postDescription,
+            postLink,
+            feedId: feed.id,
+            postId: uniqueId(),
+          }
+        })
         watchedState.feeds.unshift(feed);
-        watchedState.posts.unshift(...posts);
+        watchedState.posts.unshift(...settledPosts);
         watchedState.error = null;
         watchedState.status = 'success';
+        
       })
       .catch((oshibka) => {
         watchedState.error = oshibka.message;
         watchedState.status = 'filling';
-      });
+      })
+      .finally(() => state.updatingStatus ? null : refreshFeeds(state));
   })
   .catch((error) => {
     console.log(error);
