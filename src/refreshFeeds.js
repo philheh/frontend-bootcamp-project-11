@@ -1,5 +1,5 @@
 const refreshFeeds = (state) => {
-    state.updatingStatus = true;
+  state.updatingStatus = true;
 };
 
 export default refreshFeeds;

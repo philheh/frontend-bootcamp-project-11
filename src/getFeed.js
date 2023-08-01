@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { uniqueId } from 'lodash';
 import parse from './parse.js';
 import formatFeed from './formatFeed.js';
 import proxiedUrl from './proxy.js';
-import { uniqueId } from 'lodash';
+
 import refreshFeeds from './refreshFeeds.js';
 const getFeed = (url, watchedState, state) => axios
   .get(proxiedUrl(url))
@@ -10,18 +11,16 @@ const getFeed = (url, watchedState, state) => axios
     parse(res)
       .then((parsed) => {
         const { feed, posts } = formatFeed(parsed, url);
-        feed.id = uniqueId()
-        const settledPosts = posts.map(({postTitle,
-          postDescription,
-          postLink}) => {
+        feed.id = uniqueId();
+        const settledPosts = posts.map(({ postTitle, postDescription, postLink }) => {
           return {
             postTitle,
             postDescription,
             postLink,
             feedId: feed.id,
             postId: uniqueId(),
-          }
-        })
+          };
+        });
         watchedState.feeds.unshift(feed);
         watchedState.posts.unshift(...settledPosts);
         watchedState.error = null;
@@ -32,7 +31,9 @@ const getFeed = (url, watchedState, state) => axios
         watchedState.error = oshibka.message;
         watchedState.status = 'filling';
       })
-      .finally(() => state.updatingStatus ? null : refreshFeeds(state));
+      .finally(() => {
+        if (state.updatingStatus) return;
+         refreshFeeds(state)});
   })
   .catch((error) => {
     console.log(error);
