@@ -6,7 +6,6 @@ import formatFeed from './formatFeed.js';
 
 const update = (watchedState, state) => {
   const comparePostTitles = (post1, post2) => post1.postTitle === post2.postTitle;
-  state.isUpdating = true;
   const promises = state.feeds.map(({ url }) => axios.get(proxiedUrl(url))
     .then((response) => parse(response))
     .then((parsedData) => formatFeed(parsedData))
