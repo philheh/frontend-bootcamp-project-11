@@ -2,8 +2,8 @@ import axios from 'axios';
 import parse from './parse.js';
 import formatFeed from './formatFeed.js';
 import proxiedUrl from './proxy.js';
-
-const getFeed = (url, watchedState) => axios
+import update from './update.js';
+const getFeed = (url, watchedState, state) => axios
   .get(proxiedUrl(url))
   .then((res) => {
     parse(res)
@@ -14,10 +14,11 @@ const getFeed = (url, watchedState) => axios
         watchedState.error = null;
         watchedState.status = 'success';
       })
-      .catch((oshibka) => {
-        watchedState.error = oshibka.message;
+      .catch((error) => {
+        watchedState.error = error.message;
         watchedState.status = 'filling';
-      });
+      })
+      .finally(() => watchedState.isUpdating === true ? null : update(watchedState, state));
   })
   .catch((error) => {
     console.log(error);

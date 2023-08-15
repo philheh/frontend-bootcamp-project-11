@@ -27,7 +27,7 @@ const render = (elements, state, i18Instance) => (path, value, preValue) => {
       renderVisitedLinks(value);
       break;
     default:
-      throw new Error('invalid render was called');
+      throw new Error(`${path}invalid render was called`);
   }
 };
 

@@ -20,6 +20,7 @@ const app = () => {
     error: null,
     visitedLinksIDs: new Set(),
     modalID: null,
+    isUpdating: false,
   };
 
   const watchedState = onChange(state, render(elements, state, i18Instance));
@@ -38,7 +39,7 @@ const app = () => {
   });
 
   elements.postsContainer.addEventListener('click', (e) => {
-    if (Object.hasOwn(e.target.dataset, 'id') && e.target.tagName === 'BUTTON') {
+    if (Object.hasOwn(e.target.dataset, 'id')) {
       const { id } = e.target.dataset;
       watchedState.modalID = id;
       watchedState.visitedLinksIDs.add(id);
