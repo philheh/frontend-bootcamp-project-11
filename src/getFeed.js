@@ -3,6 +3,7 @@ import parse from './parse.js';
 import formatFeed from './formatFeed.js';
 import proxiedUrl from './proxy.js';
 import update from './update.js';
+
 const getFeed = (url, watchedState, state) => axios
   .get(proxiedUrl(url))
   .then((res) => {

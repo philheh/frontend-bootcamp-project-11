@@ -11,9 +11,7 @@ const update = (watchedState, state) => {
     .then((response) => parse(response))
     .then((parsedData) => formatFeed(parsedData))
     .then(({ posts }) => {
-      console.log(posts);
       const newPosts = differenceWith(posts, state.posts, comparePostTitles);
-      console.log(newPosts.length);
       watchedState.posts.unshift(...newPosts);
     })
     .catch(() => null));
