@@ -2,7 +2,6 @@ import axios from 'axios';
 import parse from './parse.js';
 import formatFeed from './formatFeed.js';
 import proxiedUrl from './proxy.js';
-import update from './update.js';
 
 const getFeed = (url, watchedState, state) => axios
   .get(proxiedUrl(url))
@@ -19,7 +18,7 @@ const getFeed = (url, watchedState, state) => axios
         watchedState.error = error.message;
         watchedState.status = 'filling';
       })
-      .finally(() => watchedState.isUpdating === true ? null : update(watchedState, state));
+      //.finally(() => watchedState.isUpdating === true ? null : update(watchedState, state));
   })
   .catch((error) => {
     console.log(error);

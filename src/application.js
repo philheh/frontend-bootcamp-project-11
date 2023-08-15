@@ -4,6 +4,7 @@ import validate from './validator.js';
 import resources from '../locales/index.js';
 import { render, elements } from './view.js';
 import getFeed from './getFeed.js';
+import update from './update.js';
 
 const app = () => {
   const i18Instance = i18next.createInstance();
@@ -45,6 +46,7 @@ const app = () => {
       watchedState.visitedLinksIDs.add(id);
     }
   });
+  update(watchedState, state);
 };
 
 export default app;
