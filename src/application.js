@@ -32,7 +32,7 @@ const app = () => {
     validate(elements.input.value, state)
       .then((validURL) => {
         watchedState.status = 'sending';
-        getFeed(validURL, watchedState, state);
+        getFeed(validURL, watchedState);
       })
       .catch((error) => {
         watchedState.error = error.message;
